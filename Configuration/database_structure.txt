@@ -1,0 +1,5 @@
+Categorie(-Id_c, Name_c)
+Product(-Id_p, Name_p,  Price_p, Description_p, #Id_c)
+Image(-Id_i, Url_i, Type_i, #Id_P)
+User(-Id_u, Email_u, Password_u, First_Name_u, Last_Name_u, Sexe_u, Countery_u, City_u, Phone_u, Adress_u, Date_of_Birth_u)
+Order(-id_o, Date_o, Qte_o, #Id_p, #Id_u)
