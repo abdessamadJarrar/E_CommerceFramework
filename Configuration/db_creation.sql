@@ -40,4 +40,4 @@ CREATE TABLE Orders
   Id_p INT,
   Id_u INT,
   CONSTRAINT Order_fk1 FOREIGN KEY(Id_p) REFERENCES Products(Id_p),
-  CONSTRAINT Order_fk2 FOREIGN KEY(Id_u) REFERENCES Products(Id_u));
+  CONSTRAINT Order_fk2 FOREIGN KEY(Id_u) REFERENCES users(Id_u));
