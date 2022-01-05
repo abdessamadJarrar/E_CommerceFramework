@@ -21,9 +21,11 @@
     $post["last_name"], $post["sexe"], $post["country"], $post["city"],
     $post["phone"],$post["address"],$post["birth"]);
     $user->show();
+    /*
     if(!filter_var($post["email"],FILTER_VALIDATE_EMAIL))
     {
       echo "not a valid email<br>";
     }
+    */
     return $user->validate();
   }
