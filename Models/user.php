@@ -1,4 +1,5 @@
 <?php
+require_once("db_connect.php");
 class user{
 
   private $Id;
@@ -42,6 +43,38 @@ class user{
     echo "Date of Birth :" . $this->Date_of_Birth . "<br>";
   }
 
+  public function save()
+  {
+    if($this->validate()==1)
+    {
+      $this->Password = password_hash($this->Password,PASSWORD_DEFAULT); // user password_verify($input,$HashedPassword);
+      $db_c = new db_connect();
+      $numberRows = $db_c->execute("INSERT INTO users values(NULL,'$this->Email','$this->Password','$this->First_Name','$this->Last_Name','$this->Sexe','$this->Country','$this->City','$this->Phone','$this->Address','$this->Date_of_Birth')");
+      return $numberRows;
+    }
+    else {
+      echo "User data are not valid";
+      return 0;
+    }
+  }
+
+  public function login($username,$password)
+  {
+    $db_c = new db_connect();
+    $row = $db_c->select("SELECT * FROM users WHERE Email_u = '$username'");
+    print_r2($row);
+    $pwd = $row[0]['Password_u'];
+    if(password_verify($password,$pwd))
+    {
+      echo "login sucess";
+      return $row[0]['Id_u'];
+    }
+    else {
+      echo "login failed : $password and $pwd  does not match";
+      return -1;
+    }
+  }
+
   public function validate()
   {
     return $this->validate_email() * $this->validate_password() *
@@ -82,7 +115,7 @@ class user{
 
   private function validate_sexe() // Error number 11
   {
-    if($this->Sexe !== "m" and $this->Sexe !== "f")
+    if($this->Sexe !== "MALE" and $this->Sexe !== "FEMALE")
     {
       return 11;
     }

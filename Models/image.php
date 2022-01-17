@@ -7,9 +7,8 @@ class image{
   private $type;
   private $idProduct;
 
-  public function setProperties($id,$url,$type,$idProduct)
+  public function setProperties($url,$type,$idProduct)
   {
-    $this->id = $id;
     $this->url = $url;
     $this->type = $type;
     $this->idProduct = $idProduct;
@@ -27,5 +26,11 @@ class image{
       $nbrRow = $c->execute("INSERT INTO Images VALUES (null,'$this->url','$this->type',$this->idProduct)");
     }
     return $nbrRow;
+  }
+
+  public static function getImages($condition)
+  {
+    $c = new db_connect();
+    return $c->select("SELECT * FROM images $condition");
   }
 }

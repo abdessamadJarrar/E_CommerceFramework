@@ -4,7 +4,7 @@ class db_connect{
   private $local = "localhost";
   private $dbname = "e_commerce_framework";
   private $username = "root";
-  private $password = "settat01";
+  private $password = "";
 
   public function execute($query)
   {
@@ -17,8 +17,8 @@ class db_connect{
       $dbo = new PDO("mysql:local=$local;dbname=$dbname",$username,$password);
       $numRow = $dbo->exec($query);
       $dbo = null;
-    }catch (\Exception $e) {
-      echo "Database Error!";
+    }catch (PDOException $e) {
+      echo "Database Error : " . $e->getMessage();
     }
     return $numRow;
   }
@@ -43,7 +43,7 @@ class db_connect{
       $query = null;
       $dbo = null;
     } catch (\Exception $e) {
-      echo "Database Error";
+      echo "Database Error : " . $e->getMessage();
     }
     return $rows;
   }
